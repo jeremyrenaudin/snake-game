@@ -16,16 +16,16 @@ snake = Snake()
 food = Food()
 scoreboard = Scoreboard()
 
-# define keys that the screen will detect and their related actions to execute
-screen.listen()
-screen.onkey(fun=snake.up, key="Up")
-screen.onkey(fun=snake.down, key="Down")
-screen.onkey(fun=snake.left, key="Left")
-screen.onkey(fun=snake.right, key="Right")
-
 # launch the game
 game_is_on = True
 while game_is_on:
+    # define keys that the screen will detect and their related actions to execute
+    screen.listen()
+    screen.onkey(fun=snake.up, key="Up")
+    screen.onkey(fun=snake.down, key="Down")
+    screen.onkey(fun=snake.left, key="Left")
+    screen.onkey(fun=snake.right, key="Right")
+
     # update the screen every 0.1 second after each snake's move
     screen.update()
     time.sleep(0.1)
@@ -41,14 +41,25 @@ while game_is_on:
 
     # Detect collision with walls
     if snake.head.xcor() > 280 or snake.head.xcor() < -280 or snake.head.ycor() > 280 or snake.head.ycor() < -280:
-        game_is_on=False
         scoreboard.game_over()
+        time.sleep(0.8)
+        if scoreboard.play_again(screen=screen):
+            scoreboard.reset()
+            snake.reset()
+        else:
+            scoreboard.reset()
+            game_is_on = False
+            screen.bye()
 
     # Detect collision between head and tail
     for segment in snake.segments[1:]:
         if snake.head.distance(segment) < 10:
-            game_is_on=False
             scoreboard.game_over()
-        
-# exit the game on click
-screen.exitonclick()
+            time.sleep(0.8)
+            if scoreboard.play_again(screen=screen):
+                scoreboard.reset()
+                snake.reset()
+            else:
+                scoreboard.reset()
+                game_is_on = False
+                screen.bye()
