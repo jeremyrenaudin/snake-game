@@ -1,7 +1,9 @@
 from turtle import Turtle
+
 ALIGNMENT = "center"
 FONT = ("Courier", 20, "normal")
 SCOREBOARD_POSITION = (0, 260)
+PLAY_AGAIN_MESSAGE = "Do you want to play again? Enter Yes or No"
 
 
 class Scoreboard(Turtle):
@@ -39,9 +41,9 @@ class Scoreboard(Turtle):
         self.write(f"GAME OVER", move=False, align=ALIGNMENT, font=FONT)
 
     def play_again(self, screen):
-        play_again = screen.textinput(title="Play again", prompt="Do you want to play again? Enter Yes or No")
+        play_again = screen.textinput(title="Play again", prompt=PLAY_AGAIN_MESSAGE)
         while play_again.lower() not in ["yes", "no"]:
-            play_again = screen.textinput(title="Play again", prompt="Do you want to play again? Enter Yes or No")
+            play_again = screen.textinput(title="Play again", prompt=PLAY_AGAIN_MESSAGE)
         if play_again.lower() == "yes":
             return True
         else:
