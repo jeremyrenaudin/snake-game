@@ -47,6 +47,7 @@ while game_is_on:
             scoreboard.reset()
             snake.reset()
         else:
+            scoreboard.reset()
             game_is_on = False
             screen.bye()
 
@@ -59,5 +60,6 @@ while game_is_on:
                 scoreboard.reset()
                 snake.reset()
             else:
+                scoreboard.reset()
                 game_is_on = False
                 screen.bye()
