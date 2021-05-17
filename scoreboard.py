@@ -1,6 +1,7 @@
 from turtle import Turtle
 ALIGNMENT = "center"
 FONT = ("Courier", 20, "normal")
+SCOREBOARD_POSITION = (0, 260)
 
 
 class Scoreboard(Turtle):
@@ -11,12 +12,13 @@ class Scoreboard(Turtle):
             self.high_score = int(f.read())
         self.color("white")
         self.penup()
-        self.goto(0, 260)
+        self.goto(SCOREBOARD_POSITION)
         self.update_scoreboard()
         self.hideturtle()
         
     def update_scoreboard(self):
         self.clear()
+        self.goto(SCOREBOARD_POSITION)
         self.write(f"Score: {self.score} High Score: {self.high_score}", move=False, align=ALIGNMENT, font=FONT)
         
     def increase_score(self):
@@ -30,3 +32,17 @@ class Scoreboard(Turtle):
                 f.write(f"{self.high_score}")
         self.score = 0
         self.update_scoreboard()
+
+    def game_over(self):
+        """Display a GAME OVER message"""
+        self.goto(0, 0)
+        self.write(f"GAME OVER", move=False, align=ALIGNMENT, font=FONT)
+
+    def play_again(self, screen):
+        play_again = screen.textinput(title="Play again", prompt="Do you want to play again? Enter Yes or No")
+        while play_again.lower() not in ["yes", "no"]:
+            play_again = screen.textinput(title="Play again", prompt="Do you want to play again? Enter Yes or No")
+        if play_again.lower() == "yes":
+            return True
+        else:
+            return False
