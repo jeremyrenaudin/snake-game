@@ -23,3 +23,6 @@ I broke down the problem of building the snake game into 9 steps.
 - `food.py`: package to model the food.
 - `scoreboard.py`: package to initialize a scoreboard.
 - `data.txt`: text file to store the highest score.
+
+## Keys to play
+Simply play using Up, Down, Left and Right arrow keys.
